@@ -1,0 +1,409 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* CSS Variables for Theme */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+}
+
+.dark {
+  --bg-primary: #111827;
+  --bg-secondary: #1f2937;
+  --bg-tertiary: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --border-primary: #374151;
+  --border-secondary: #4b5563;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #ffffff;
+  color: #111827;
+  overflow-x: hidden;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar - Light theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f9fafb;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Hidden scrollbar for textarea */
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* WebKit */
+}
+
+/* Smooth animations */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Focus styles - Notion-like */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #6b7280;
+  outline-offset: 2px;
+}
+
+/* Selection styles */
+::selection {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Auto-resize textarea with hidden scrollbar */
+textarea {
+  resize: none;
+  overflow-y: auto;
+}
+
+/* Notion-style shadows */
+.notion-shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.notion-shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Fix for rounded corners and borders */
+.input-container {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Upload animations */
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-in {
+  animation: slideInFromBottom 0.3s ease-out;
+}
+
+.slide-in-from-bottom-2 {
+  animation: slideInFromBottom 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* Drag and drop styles */
+.drag-over {
+  background-color: #f8fafc;
+  border: 2px dashed #94a3b8;
+}
+
+/* Upload button hover effects */
+button[data-upload-button]:hover {
+  transform: scale(1.05);
+}
+
+button[data-upload-button]:active {
+  transform: scale(0.95);
+}
+
+/* File upload indicator gradient */
+.file-upload-gradient {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Progress bar animation */
+.progress-bar {
+  transition: width 0.3s ease-out;
+}
+
+/* Success indicator pulse */
+.success-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Quiz-specific animations and styles */
+@keyframes quizSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes quizFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes quizBounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progressBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+@keyframes correctAnswer {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #dcfce7;
+  }
+  100% {
+    background-color: #bbf7d0;
+  }
+}
+
+@keyframes incorrectAnswer {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #fef2f2;
+  }
+  100% {
+    background-color: #fecaca;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Quiz animation classes */
+.quiz-slide-in {
+  animation: quizSlideIn 0.5s ease-out;
+}
+
+.quiz-fade-in {
+  animation: quizFadeIn 0.3s ease-out;
+}
+
+.quiz-bounce-in {
+  animation: quizBounceIn 0.6s ease-out;
+}
+
+.quiz-progress-bar {
+  animation: progressBar 0.8s ease-out;
+}
+
+.quiz-correct {
+  animation: correctAnswer 0.5s ease-out;
+}
+
+.quiz-incorrect {
+  animation: incorrectAnswer 0.5s ease-out;
+}
+
+.quiz-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.quiz-confetti {
+  animation: confetti 3s ease-out infinite;
+}
+
+/* Quiz hover effects */
+.quiz-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-option:active {
+  transform: translateY(0);
+}
+
+.quiz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Quiz progress indicator */
+.quiz-progress {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 9999px;
+  transition: width 0.3s ease-out;
+}
+
+/* Quiz result animations */
+.quiz-result-enter {
+  animation: quizBounceIn 0.8s ease-out;
+}
+
+.quiz-score-counter {
+  animation: quizFadeIn 0.5s ease-out 0.3s both;
+}
+
+/* Quiz navigation buttons */
+.quiz-nav-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.quiz-nav-button:hover {
+  transform: scale(1.05);
+}
+
+.quiz-nav-button:active {
+  transform: scale(0.95);
+}
+
+/* Quiz timer animation */
+.quiz-timer-warning {
+  animation: pulse 1s infinite;
+  color: #ef4444;
+}
+
+.quiz-timer-critical {
+  animation: shake 0.5s infinite;
+  color: #dc2626;
+}
+
+/* Quiz question transition */
+.quiz-question-enter {
+  animation: quizSlideIn 0.4s ease-out;
+}
+
+.quiz-question-exit {
+  animation: quizSlideIn 0.4s ease-out reverse;
+}
+
+/* Dark mode quiz styles */
+.dark .quiz-option:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.dark .quiz-card:hover {
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
